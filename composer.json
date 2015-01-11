@@ -1,6 +1,6 @@
 {
     "name": "zelenin/yii2-semantic-ui",
-    "description": "Yii2 widgets",
+    "description": "Semantic UI extension for Yii2",
     "version": "0.0.1",
     "type": "yii2-extension",
     "keywords": [
