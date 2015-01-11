@@ -1,0 +1,36 @@
+{
+    "name": "zelenin/yii2-semantic-ui",
+    "description": "Yii2 widgets",
+    "version": "0.0.1",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "widgets",
+        "semantic",
+        "semantic ui"
+    ],
+    "homepage": "https://github.com/zelenin/yii2-semantic-ui",
+    "time": "2015-01-12",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksandr Zelenin",
+            "email": "aleksandr@zelenin.me",
+            "homepage": "http://zelenin.me",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/zelenin/yii2-semantic-ui/issues",
+        "source": "https://github.com/zelenin/yii2-semantic-ui"
+    },
+    "require": {
+        "yiisoft/yii2": "~2",
+        "bower-asset/semantic": "~1.6@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zelenin\yii\SemanticUI\\": ""
+        }
+    }
+}
