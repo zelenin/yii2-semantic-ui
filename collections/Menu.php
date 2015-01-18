@@ -2,11 +2,10 @@
 
 namespace Zelenin\yii\SemanticUI\collections;
 
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\AssetBundle;
-use Yii;
 use Zelenin\yii\SemanticUI\Widget;
 
 class Menu extends Widget
@@ -14,7 +13,7 @@ class Menu extends Widget
     public $route;
     public $params;
 
-    public $options = ['class'=>'ui menu'];
+    public $options = ['class' => 'ui menu'];
 
     public $items = [];
     public $rightItems = [];
@@ -53,19 +52,17 @@ class Menu extends Widget
         if (!empty($items)) {
             $options = $this->options;
             $tag = ArrayHelper::remove($options, 'tag', 'div');
-            if($rightItems) {
-                $rightMenu = Html::tag($tag, $this->renderItems($rightItems), ['class'=>'right menu']);
+            if ($rightItems) {
+                $rightMenu = Html::tag($tag, $this->renderItems($rightItems), ['class' => 'right menu']);
                 echo Html::tag($tag, $this->renderItems($items) . $rightMenu, $options);
             } else {
                 echo Html::tag($tag, $this->renderItems($items), $options);
             }
-
         }
     }
 
     protected function renderItems($items)
     {
-
         $n = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
@@ -90,8 +87,8 @@ class Menu extends Widget
                 }
             }
 
-            if(!empty($item['items'])) {
-                $menu = strtr($this->dropdownTemplate,[
+            if (!empty($item['items'])) {
+                $menu = strtr($this->dropdownTemplate, [
                     '{item}' => $this->renderItem($item),
                     '{submenu}' => strtr($this->submenuTemplate, [
                         '{items}' => $this->renderItems($item['items'])
@@ -152,7 +149,6 @@ class Menu extends Widget
             }
 
             if (!isset($item['active'])) {
-
                 if ($this->activateParents && $hasActiveChild || $this->activateItems && $this->isItemActive($item)) {
                     $active = $items[$i]['active'] = true;
                 } else {
