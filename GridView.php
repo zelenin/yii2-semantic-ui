@@ -6,4 +6,5 @@ class GridView extends \yii\grid\GridView
 {
     public $tableOptions = ['class' => 'ui very basic table'];
     public $dataColumnClass = 'Zelenin\yii\SemanticUI\DataColumn';
+    public $pager = ['class' => 'Zelenin\yii\SemanticUI\LinkPager'];
 }

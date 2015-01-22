@@ -58,7 +58,7 @@ class Accordion extends Widget
 
     public function renderTitle($item)
     {
-        $encode = ArrayHelper::remove($this->titleOptions, 'encode', true);
+        $encode = ArrayHelper::getValue($this->titleOptions, 'encode', true);
         $title = Elements::icon('dropdown') . ($encode ? Html::encode($item['title']) : $item['title']);
         $options = $this->titleOptions;
         Html::addCssClass($options, 'title');
@@ -70,7 +70,7 @@ class Accordion extends Widget
 
     public function renderContent($item)
     {
-        $encode = ArrayHelper::remove($this->contentOptions, 'encode', true);
+        $encode = ArrayHelper::getValue($this->contentOptions, 'encode', true);
         $content = $encode ? Html::encode($item['content']) : $item['content'];
         $options = $this->contentOptions;
         Html::addCssClass($options, 'content');
