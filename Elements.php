@@ -13,9 +13,6 @@ class Elements
         return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
     }
 
-    /**
-     * @todo toggle
-     */
     public static function button($content, $options = [])
     {
         return static::renderElement('button', $content, $options);
@@ -53,7 +50,7 @@ class Elements
         return static::renderElement('images', $content, $options);
     }
 
-    public static function inputWrapper($content, $options = [])
+    public static function input($content, $options = [])
     {
         return static::renderElement('input', $content, $options);
     }
@@ -83,7 +80,7 @@ class Elements
         return static::renderElement('dimmer', $content, $options);
     }
 
-    public static function loader($content, $options = [])
+    public static function loader($content = '', $options = [])
     {
         return static::renderElement('loader', $content, $options);
     }

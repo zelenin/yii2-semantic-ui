@@ -35,7 +35,7 @@ class DataColumn extends \yii\grid\DataColumn
                     'options' => $options
                 ]). ' ' . $error;
             } else {
-                return '<div class="ui input">' . Html::activeTextInput($model, $this->attribute, $this->filterInputOptions) . '</div> ' . $error;
+                return '<div class="ui fluid input">' . Html::activeTextInput($model, $this->attribute, $this->filterInputOptions) . '</div> ' . $error;
             }
         } else {
             return parent::renderFilterCellContent();
