@@ -25,6 +25,9 @@ class Accordion extends Widget
     const TYPE_VERTICAL = 'vertical';
     public $vertical = false;
 
+    const TYPE_INVERTED = 'inverted';
+    public $inverted = false;
+
     public function run()
     {
         $this->registerJs();
@@ -39,7 +42,12 @@ class Accordion extends Widget
         if ($this->vertical) {
             Html::addCssClass($this->options, self::TYPE_VERTICAL);
         }
-        echo Html::tag('div', $this->renderItems(), $this->options);
+        if ($this->inverted) {
+            Html::addCssClass($this->options, self::TYPE_INVERTED);
+            echo Elements::segment(Html::tag('div', $this->renderItems(), $this->options), ['class' => self::TYPE_INVERTED]);
+        } else {
+            echo Html::tag('div', $this->renderItems(), $this->options);
+        }
     }
 
     public function renderItems()
@@ -89,8 +97,7 @@ class Accordion extends Widget
     public function registerJs()
     {
         $this->registerJsAsset();
-        $view = $this->getView();
         $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
-        $view->registerJs('jQuery("#' . $this->getId() . '").accordion(' . $clientOptions . ');');
+        $this->getView()->registerJs('jQuery("#' . $this->getId() . '").accordion(' . $clientOptions . ');');
     }
 }
