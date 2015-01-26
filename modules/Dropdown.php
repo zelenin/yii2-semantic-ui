@@ -5,6 +5,7 @@ namespace Zelenin\yii\SemanticUI\modules;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\web\View;
 use Zelenin\yii\SemanticUI\InputWidget;
 
 class Dropdown extends InputWidget
@@ -22,6 +23,6 @@ class Dropdown extends InputWidget
         $clientOptions = empty($this->clientOptions)
             ? null
             : Json::encode($this->clientOptions);
-        $this->getView()->registerJs('jQuery( "#' . $this->options['id'] . '" ).dropdown(' . $clientOptions . ');');
+        $this->getView()->registerJs('jQuery( "#' . $this->options['id'] . '" ).dropdown(' . $clientOptions . ');', View::POS_END);
     }
 }
