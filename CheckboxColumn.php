@@ -24,7 +24,7 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
             return Checkbox::widget([
                 'name' => $name,
                 'checked' => false,
-                'checkboxOptions' => [
+                'inputOptions' => [
                     'class' => 'select-on-check-all'
                 ]
             ]);
@@ -44,7 +44,7 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
         return Checkbox::widget([
             'name' => $this->name,
             'checked' => !empty($options['checked']),
-            'checkboxOptions' => $options
+            'inputOptions' => $options
         ]);
     }
 }
