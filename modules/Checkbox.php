@@ -12,7 +12,7 @@ class Checkbox extends InputWidget
     public $label;
     public $labelOptions = [];
 
-    public $checkboxOptions = [];
+    public $inputOptions = [];
     public $checked = false;
 
     public $type = self::TYPE_CHECKBOX;
@@ -32,14 +32,16 @@ class Checkbox extends InputWidget
     public function run()
     {
         $this->registerJs();
+        $this->prepareInputId();
+
         Html::addCssClass($this->options, 'ui ' . $this->type . ' checkbox');
-        if($this->readOnly) {
+        if ($this->readOnly) {
             Html::addCssClass($this->options, self::TYPE_READONLY);
         }
-        if($this->disabled) {
+        if ($this->disabled) {
             Html::addCssClass($this->options, self::TYPE_DISABLED);
         }
-        if($this->fitted) {
+        if ($this->fitted) {
             Html::addCssClass($this->options, self::TYPE_FITTED);
         }
 
@@ -50,19 +52,23 @@ class Checkbox extends InputWidget
 
     public function renderInput()
     {
-        if (!isset($this->checkboxOptions['id'])) {
-            $id = $this->getId() . '-' . ($this->hasModel() ? $this->attribute : $this->name);
-            $this->checkboxOptions['id'] = $id;
-        }
         return $this->hasModel()
-            ? Html::activeCheckbox($this->model, $this->attribute, $this->checkboxOptions)
-            : Html::checkbox($this->name, $this->checked, $this->checkboxOptions);
+            ? Html::activeCheckbox($this->model, $this->attribute, $this->inputOptions)
+            : Html::checkbox($this->name, $this->checked, $this->inputOptions);
+    }
+
+    public function prepareInputId()
+    {
+        if (!isset($this->inputOptions['id'])) {
+            $id = $this->getId() . '-' . ($this->hasModel() ? $this->attribute : $this->name);
+            $this->inputOptions['id'] = $id;
+        }
     }
 
     public function renderLabel()
     {
         if (!isset($this->labelOptions['for'])) {
-            $this->labelOptions['for'] = $this->checkboxOptions['id'];
+            $this->labelOptions['for'] = $this->inputOptions['id'];
         }
         return $this->hasModel()
             ? Html::activeLabel($this->model, $this->attribute, $this->labelOptions)
