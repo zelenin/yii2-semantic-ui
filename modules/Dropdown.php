@@ -20,9 +20,7 @@ class Dropdown extends InputWidget
         echo $this->hasModel()
             ? Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options)
             : Html::dropDownList($this->name, $this->selection, $this->items, $this->options);
-        $clientOptions = empty($this->clientOptions)
-            ? null
-            : Json::encode($this->clientOptions);
+        $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
         $this->getView()->registerJs('jQuery( "#' . $this->options['id'] . '" ).dropdown(' . $clientOptions . ');', View::POS_END);
     }
 }
