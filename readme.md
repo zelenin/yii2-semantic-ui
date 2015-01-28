@@ -49,8 +49,9 @@ class AppAsset extends AssetBundle
 
 Use Semantic UI widgets and elements. Standard Yii2 widgets also adopted.
 
-### Examples (or demo)
-WIP
+### Demo
+
+[Demo site](http://yii2-semantic-ui.zelenin.pw)
 
 ### Work in progress
 

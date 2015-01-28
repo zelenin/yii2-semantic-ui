@@ -98,7 +98,7 @@ class Modal extends Widget
         $this->registerJsAsset();
         $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
         if ($clientOptions) {
-            $this->getView()->registerJs('jQuery("#' . $this->getId() . '").modal(' . $clientOptions . ');');
+            $this->getView()->registerJs('jQuery("#' . $this->options['id'] . '").modal(' . $clientOptions . ');');
         }
     }
 }

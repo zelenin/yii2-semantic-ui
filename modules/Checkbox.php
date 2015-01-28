@@ -79,6 +79,6 @@ class Checkbox extends InputWidget
     {
         $this->registerJsAsset();
         $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
-        $this->getView()->registerJs('jQuery("#' . $this->getId() . '").checkbox(' . $clientOptions . ');');
+        $this->getView()->registerJs('jQuery("#' . $this->options['id'] . '").checkbox(' . $clientOptions . ');');
     }
 }

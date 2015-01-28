@@ -98,6 +98,6 @@ class Accordion extends Widget
     {
         $this->registerJsAsset();
         $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
-        $this->getView()->registerJs('jQuery("#' . $this->getId() . '").accordion(' . $clientOptions . ');');
+        $this->getView()->registerJs('jQuery("#' . $this->options['id'] . '").accordion(' . $clientOptions . ');');
     }
 }

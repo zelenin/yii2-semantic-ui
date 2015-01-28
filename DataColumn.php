@@ -5,6 +5,7 @@ namespace Zelenin\yii\SemanticUI;
 use yii\base\Model;
 use yii\helpers\Html;
 use Zelenin\yii\SemanticUI\modules\Dropdown;
+use Zelenin\yii\SemanticUI\modules\Select;
 
 class DataColumn extends \yii\grid\DataColumn
 {
@@ -28,7 +29,7 @@ class DataColumn extends \yii\grid\DataColumn
             }
             if (is_array($this->filter)) {
                 $options = array_merge(['prompt' => ''], $this->filterDropdownOptions);
-                return Dropdown::widget([
+                return Select::widget([
                     'model' => $model,
                     'attribute' => $this->attribute,
                     'items' => $this->filter,
