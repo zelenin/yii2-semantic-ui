@@ -12,9 +12,9 @@ class Widget extends \yii\base\Widget
     public function init()
     {
         parent::init();
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = $this->getId();
-        }
+        isset($this->options['id'])
+            ? $this->setId($this->options['id'])
+            : $this->options['id'] = $this->getId();
     }
 
     public function registerJsAsset()
