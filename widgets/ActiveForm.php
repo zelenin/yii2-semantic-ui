@@ -1,6 +1,6 @@
 <?php
 
-namespace Zelenin\yii\SemanticUI;
+namespace Zelenin\yii\SemanticUI\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
@@ -11,7 +11,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
     const SIZE_NORMAL = 'normal';
     const SIZE_LARGE = 'large';
 
-    public $fieldClass = 'Zelenin\yii\SemanticUI\ActiveField';
+    public $fieldClass = 'Zelenin\yii\SemanticUI\widgets\ActiveField';
     public $options = ['class' => 'ui form'];
 
     public $size = self::SIZE_NORMAL;

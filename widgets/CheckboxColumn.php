@@ -1,8 +1,9 @@
 <?php
 
-namespace Zelenin\yii\SemanticUI;
+namespace Zelenin\yii\SemanticUI\widgets;
 
 use Closure;
+use yii\helpers\Json;
 use Zelenin\yii\SemanticUI\modules\Checkbox;
 
 class CheckboxColumn extends \yii\grid\CheckboxColumn
@@ -11,11 +12,11 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
     {
         $name = rtrim($this->name, '[]') . '_all';
         $id = $this->grid->options['id'];
-        $options = json_encode([
+        $options = Json::encode([
             'name' => $this->name,
             'multiple' => $this->multiple,
             'checkAll' => $name,
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        ]);
         $this->grid->getView()->registerJs("jQuery('#$id').yiiGridView('setSelectionColumn', $options);");
 
         if ($this->header !== null || !$this->multiple) {
@@ -38,7 +39,7 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
         } else {
             $options = $this->checkboxOptions;
             if (!isset($options['value'])) {
-                $options['value'] = is_array($key) ? json_encode($key, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : $key;
+                $options['value'] = is_array($key) ? Json::encode($key) : $key;
             }
         }
         return Checkbox::widget([
