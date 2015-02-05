@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use Zelenin\yii\SemanticUI\Elements;
 use Zelenin\yii\SemanticUI\Widget;
 
 class Menu extends Widget
@@ -13,20 +14,57 @@ class Menu extends Widget
     public $route;
     public $params;
 
-    public $options = ['class' => 'ui menu'];
-
     public $items = [];
-    public $rightItems = [];
+    public $rightMenuItems = [];
+    public $subMenuItems = [];
+
+    public $options = [];
+    public $rightMenuOptions = [];
+    public $subMenuOptions = [];
+
     public $itemOptions = [];
 
-    public $firstItemCssClass;
-    public $lastItemCssClass;
-    public $activeCssClass = 'active';
+    public $vertical = false;
+    const TYPE_VERTICAL = 'vertical';
 
-    public $linkTemplate = '<a class="{class}" href="{url}">{label}</a>';
-    public $labelTemplate = '{label}';
-    public $dropdownTemplate = '<div class="ui dropdown simple item"><i class="dropdown icon"></i>{item}{submenu}</div>';
-    public $submenuTemplate = '<div class="menu transition">{items}</div>';
+    public $tabular = false;
+    const TYPE_TABULAR = 'tabular';
+
+    public $topAttached = false;
+    const TYPE_TOP_ATTACHED = 'top attached';
+
+    public $tiered = false;
+    const TYPE_TIERED = 'tiered';
+
+    public $secondary = false;
+    const TYPE_SECONDARY = 'secondary';
+
+    public $pointing = false;
+    const TYPE_POINTING = 'pointing';
+
+    public $text = false;
+    const TYPE_TEXT = 'text';
+
+    public $fluid = false;
+    const TYPE_FLUID = 'fluid';
+
+    public $borderless = false;
+    const TYPE_BORDERLESS = 'borderless';
+
+    public $inverted = false;
+    const TYPE_INVERTED = 'inverted';
+
+    public $color;
+    const COLOR_GREEN = 'green';
+    const COLOR_RED = 'red';
+    const COLOR_BLUE = 'blue';
+    const COLOR_ORANGE = 'orange';
+    const COLOR_PURPLE = 'purple';
+    const COLOR_TEAL = 'teal';
+
+    public $size;
+    const SIZE_SMALL = 'small';
+    const SIZE_LARGE = 'large';
 
     public $encodeLabels = true;
 
@@ -47,79 +85,102 @@ class Menu extends Widget
 
     public function run()
     {
-        $items = $this->normalizeItems($this->items, $hasActiveChild);
-        $rightItems = $this->normalizeItems($this->rightItems, $hasActiveChild);
-        if (!empty($items)) {
-            $options = $this->options;
-            $tag = ArrayHelper::remove($options, 'tag', 'div');
-            if ($rightItems) {
-                $rightMenu = Html::tag($tag, $this->renderItems($rightItems), ['class' => 'right menu']);
-                echo Html::tag($tag, $this->renderItems($items) . $rightMenu, $options);
-            } else {
-                echo Html::tag($tag, $this->renderItems($items), $options);
-            }
+        Html::addCssClass($this->options, 'ui menu');
+        if ($this->vertical) {
+            Html::addCssClass($this->options, self::TYPE_VERTICAL);
         }
+        if ($this->tabular) {
+            Html::addCssClass($this->options, self::TYPE_TABULAR);
+        }
+        if ($this->topAttached) {
+            Html::addCssClass($this->options, self::TYPE_TOP_ATTACHED);
+        }
+        if ($this->tiered) {
+            Html::addCssClass($this->options, self::TYPE_TIERED);
+        }
+        if ($this->secondary) {
+            Html::addCssClass($this->options, self::TYPE_SECONDARY);
+        }
+        if ($this->pointing) {
+            Html::addCssClass($this->options, self::TYPE_POINTING);
+        }
+        if ($this->text) {
+            Html::addCssClass($this->options, self::TYPE_TEXT);
+        }
+        if ($this->fluid) {
+            Html::addCssClass($this->options, self::TYPE_FLUID);
+        }
+        if ($this->inverted) {
+            Html::addCssClass($this->options, self::TYPE_INVERTED);
+        }
+        if ($this->color) {
+            Html::addCssClass($this->options, $this->color);
+        }
+        if ($this->size) {
+            Html::addCssClass($this->options, $this->size);
+        }
+        if ($this->borderless) {
+            Html::addCssClass($this->options, self::TYPE_BORDERLESS);
+        }
+
+        echo Html::tag('div', $this->renderItems(), $this->options);
     }
 
-    protected function renderItems($items)
+    public function renderItems()
     {
-        $n = count($items);
-        $lines = [];
-        foreach ($items as $i => $item) {
-            $options = ArrayHelper::merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-            $class = ['item'];
+        Html::addCssClass($this->rightMenuOptions, 'right menu');
+        Html::addCssClass($this->subMenuOptions, 'ui sub menu');
+        return
+            (
+            $this->tiered
+                ?
+                Html::tag('div', $this->renderMenuPart($this->items) . Html::tag('div', $this->renderMenuPart($this->rightMenuItems), $this->rightMenuOptions), ['class' => 'menu'])
+                : $this->renderMenuPart($this->items) . Html::tag('div', $this->renderMenuPart($this->rightMenuItems), $this->rightMenuOptions)
+            ) .
+            ($this->subMenuItems ? Html::tag('div', $this->renderMenuPart($this->subMenuItems), $this->subMenuOptions) : '');
+    }
 
-            if ($item['active']) {
-                $class[] = $this->activeCssClass;
-            }
-            if ($i === 0 && $this->firstItemCssClass !== null) {
-                $class[] = $this->firstItemCssClass;
-            }
-            if ($i === $n - 1 && $this->lastItemCssClass !== null) {
-                $class[] = $this->lastItemCssClass;
-            }
+    public function renderMenuPart($items)
+    {
+        if ($items) {
+            $items = $this->normalizeItems($items, $hasActiveChild);
 
-            if (!empty($class)) {
-                if (empty($options['class'])) {
-                    $item['options']['class'] = implode(' ', $class);
-                } else {
-                    $item['options']['class'] .= ' ' . implode(' ', $class);
+            $lines = '';
+            foreach ($items as $i => $item) {
+                Html::addCssClass($item['options'], 'item');
+                if ($item['active']) {
+                    Html::addCssClass($item['options'], 'active');
                 }
-            }
 
-            if (!empty($item['items'])) {
-                $menu = strtr($this->dropdownTemplate, [
-                    '{item}' => $this->renderItem($item),
-                    '{submenu}' => strtr($this->submenuTemplate, [
-                        '{items}' => $this->renderItems($item['items'])
-                    ])
-                ]);
-            } else {
-                $menu = $this->renderItem($item);
+                if (isset($item['items'])) {
+                    Html::addCssClass($item['options'], 'ui simple dropdown');
+                    $item['label'] =
+                        Elements::icon('dropdown') .
+                        $item['label'] .
+                        Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
+                    $menu = $this->renderItem($item);
+                } else {
+                    $menu = $this->renderItem($item);
+                }
+                $lines .= $menu;
             }
-
-            $lines[] = $menu;
+            return $lines;
+        } else {
+            return '';
         }
-
-        return implode("\n", $lines);
     }
 
-    protected function renderItem($item)
+    public function renderItem($item)
     {
-        if (isset($item['url'])) {
-            $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
-
-            return strtr($template, [
-                '{url}' => Url::to($item['url']),
-                '{label}' => $item['label'],
-                '{class}' => $item['options']['class']
-            ]);
+        if (isset($item['header'])) {
+            Html::addCssClass($item['options'], 'header');
+            return Html::tag('div', $item['header'], $item['options']);
         } else {
-            $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
-
-            return strtr($template, [
-                '{label}' => $item['label']
-            ]);
+            if (isset($item['url'])) {
+                return Html::a($item['label'], Url::to($item['url']), $item['options']);
+            } else {
+                return Html::tag('div', $item['label'], $item['options']);
+            }
         }
     }
 
@@ -135,6 +196,9 @@ class Menu extends Widget
             $item['label'] = ArrayHelper::getValue($item, 'label', '');
             $encodeLabel = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
             $items[$i]['label'] = $encodeLabel ? Html::encode($item['label']) : $item['label'];
+            if (isset($items[$i]['header'])) {
+                $items[$i]['header'] = $encodeLabel ? Html::encode($item['header']) : $item['header'];
+            }
 
             $hasActiveChild = false;
             if (isset($item['items'])) {
@@ -149,14 +213,11 @@ class Menu extends Widget
             }
 
             if (!isset($item['active'])) {
-                if ($this->activateParents && $hasActiveChild || $this->activateItems && $this->isItemActive($item)) {
-                    $active = $items[$i]['active'] = true;
-                } else {
-                    $items[$i]['active'] = false;
-                }
+                $items[$i]['active'] = ($this->activateParents && $hasActiveChild) || ($this->activateItems && $this->isItemActive($item));
             } elseif ($item['active']) {
                 $active = true;
             }
+            $item['options'] = ArrayHelper::getValue($items, 'options', $this->itemOptions);
         }
 
         return array_values($items);
@@ -165,16 +226,13 @@ class Menu extends Widget
     protected function isItemActive($item)
     {
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
-
             $route = $item['url'][0];
             if ($route[0] !== '/' && Yii::$app->controller) {
                 $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
             }
-
             if (ltrim($route, '/') !== $this->route) {
                 return false;
             }
-
             unset($item['url']['#']);
 
             if (count($item['url']) > 1) {
