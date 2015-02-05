@@ -124,6 +124,6 @@ class Dropdown extends InputWidget
     {
         $this->registerJsAsset();
         $clientOptions = $this->clientOptions ? Json::encode($this->clientOptions) : null;
-        $this->getView()->registerJs('jQuery("#' . $this->options['id'] . '").dropdown(' . $clientOptions . ');', View::POS_END);
+        $this->getView()->registerJs('jQuery("#' . $this->getId() . '").dropdown(' . $clientOptions . ');', View::POS_END);
     }
 }

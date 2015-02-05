@@ -110,7 +110,13 @@ class Elements
         return static::renderElement('step', $content, $options);
     }
 
-    public static function renderElement($type, $content, $options)
+    /**
+     * @param string $type
+     * @param string $content
+     * @param array $options
+     * @return string
+     */
+    public static function renderElement($type, $content, $options = [])
     {
         Html::addCssClass($options, 'ui ' . ArrayHelper::remove($options, 'class') . ' ' . $type);
         return Html::tag(ArrayHelper::remove($options, 'tag', 'div'), $content, $options);
