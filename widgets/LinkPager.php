@@ -60,18 +60,16 @@ class LinkPager extends \yii\widgets\LinkPager
     protected function renderPageButton($label, $page, $class, $disabled, $active)
     {
         $options = ['class' => $class === '' ? null : $class];
-        if ($active) {
-            Html::addCssClass($options, $this->activePageCssClass);
-        }
         if ($disabled) {
             Html::addCssClass($options, $this->disabledPageCssClass);
-
             return Html::tag('div', Html::tag('span', $label), $options);
         }
         $linkOptions = $this->linkOptions;
         $linkOptions['data-page'] = $page;
 
+        if ($active) {
+            Html::addCssClass($linkOptions, $this->activePageCssClass);
+        }
         return Html::a($label, $this->pagination->createUrl($page), $linkOptions);
     }
-
 }
