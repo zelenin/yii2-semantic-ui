@@ -1,7 +1,7 @@
 {
     "name": "zelenin/yii2-semantic-ui",
     "description": "Semantic UI extension for Yii2",
-    "version": "0.1.1",
+    "version": "0.2.1",
     "type": "yii2-extension",
     "keywords": [
         "yii2",
@@ -10,7 +10,7 @@
         "semantic ui"
     ],
     "homepage": "https://github.com/zelenin/yii2-semantic-ui",
-    "time": "2015-02-05",
+    "time": "2015-02-18",
     "license": "MIT",
     "authors": [
         {
@@ -26,7 +26,7 @@
     },
     "require": {
         "yiisoft/yii2": "~2",
-        "bower-asset/semantic": "1.*@stable"
+        "npm-asset/semantic-ui": "1.*@stable"
     },
     "autoload": {
         "psr-4": {
