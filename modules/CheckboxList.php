@@ -32,13 +32,15 @@ class CheckboxList extends InputWidget
     public function getDefaultItem()
     {
         return function ($index, $label, $name, $checked, $value) {
+            $inputOptions =  $this->inputOptions;
+            $inputOptions['value'] = ArrayHelper::getValue($inputOptions, 'value', $value);
             return Html::tag(
                 'div',
                 Checkbox::widget([
                     'name' => $name,
                     'label' => $label,
                     'checked' => $checked,
-                    'inputOptions' => $this->inputOptions,
+                    'inputOptions' => $inputOptions,
                     'labelOptions' => $this->labelOptions
                 ]),
                 ['class' => 'field']

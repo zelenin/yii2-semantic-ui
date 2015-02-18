@@ -45,13 +45,12 @@ class Checkbox extends InputWidget
             Html::addCssClass($this->options, self::TYPE_FITTED);
         }
 
-        //$this->options['label'] = null;
-
         echo Html::tag('div', $this->renderInput() . $this->renderLabel(), $this->options);
     }
 
     public function renderInput()
     {
+        $this->inputOptions['label'] = null;
         return $this->hasModel()
             ? Html::activeCheckbox($this->model, $this->attribute, $this->inputOptions)
             : Html::checkbox($this->name, $this->checked, $this->inputOptions);

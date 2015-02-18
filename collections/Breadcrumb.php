@@ -9,7 +9,7 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Breadcrumb extends Widget
 {
-    public $items = [];
+    public $links = [];
     public $homeLink;
     public $itemOptions = [];
     public $encodeLabels = true;
@@ -40,7 +40,7 @@ class Breadcrumb extends Widget
             $items[] = $homelink;
         }
 
-        foreach ($this->items as $item) {
+        foreach ($this->links as $item) {
             if (!is_array($item)) {
                 $item = [
                     'label' => $item
