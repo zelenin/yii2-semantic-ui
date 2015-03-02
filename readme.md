@@ -49,6 +49,18 @@ class AppAsset extends AssetBundle
 
 Use Semantic UI widgets and elements. Standard Yii2 widgets also adopted.
 
+You may replace yii2 standard widgets. Write in bootstrap.php:
+
+```php
+Yii::$container->set(\yii\grid\GridView::className(), \Zelenin\yii\SemanticUI\widgets\GridView::className());
+Yii::$container->set(\yii\widgets\ActiveForm::className(), \Zelenin\yii\SemanticUI\widgets\ActiveForm::className());
+Yii::$container->set(\yii\bootstrap\ActiveForm::className(), \Zelenin\yii\SemanticUI\widgets\ActiveForm::className());
+Yii::$container->set(\yii\widgets\Breadcrumbs::className(), \Zelenin\yii\SemanticUI\collections\Breadcrumb::className());
+Yii::$container->set(\yii\grid\CheckboxColumn::className(), \Zelenin\yii\SemanticUI\widgets\CheckboxColumn::className());
+```
+
+Be very careful with it.
+
 ### Demo
 
 [Demo site](http://yii2-semantic-ui.zelenin.pw)
