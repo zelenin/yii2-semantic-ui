@@ -4,7 +4,7 @@ namespace Zelenin\yii\SemanticUI\widgets;
 
 use yii\base\Model;
 use yii\helpers\Html;
-use Zelenin\yii\SemanticUI\modules\Dropdown;
+use Zelenin\yii\SemanticUI\Elements;
 use Zelenin\yii\SemanticUI\modules\Select;
 
 class DataColumn extends \yii\grid\DataColumn
@@ -22,21 +22,27 @@ class DataColumn extends \yii\grid\DataColumn
 
         if ($this->filter !== false && $model instanceof Model && $this->attribute !== null && $model->isAttributeActive($this->attribute)) {
             if ($model->hasErrors($this->attribute)) {
-                Html::addCssClass($this->filterOptions, 'has-error');
                 $error = Html::error($model, $this->attribute, $this->grid->filterErrorOptions);
             } else {
                 $error = '';
             }
             if (is_array($this->filter)) {
                 $options = array_merge(['prompt' => ''], $this->filterDropdownOptions);
+                if ($model->hasErrors($this->attribute)) {
+                    Html::addCssClass($options, 'error');
+                }
                 return Select::widget([
                     'model' => $model,
                     'attribute' => $this->attribute,
                     'items' => $this->filter,
                     'options' => $options
-                ]). ' ' . $error;
+                ]) . ' ' . $error;
             } else {
-                return '<div class="ui fluid input">' . Html::activeTextInput($model, $this->attribute, $this->filterInputOptions) . '</div> ' . $error;
+                $options = ['class' => 'fluid'];
+                if ($model->hasErrors($this->attribute)) {
+                    Html::addCssClass($options, 'error');
+                }
+                return Elements::input(Html::activeTextInput($model, $this->attribute, $this->filterInputOptions) . $error, $options);
             }
         } else {
             return parent::renderFilterCellContent();

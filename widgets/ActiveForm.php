@@ -13,6 +13,8 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     public $fieldClass = 'Zelenin\yii\SemanticUI\widgets\ActiveField';
     public $options = ['class' => 'ui form'];
+    public $errorCssClass = 'error';
+    public $successCssClass = 'success';
 
     public $size = self::SIZE_NORMAL;
     public $inverted = false;
