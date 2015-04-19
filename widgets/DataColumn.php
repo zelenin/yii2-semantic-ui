@@ -35,7 +35,8 @@ class DataColumn extends \yii\grid\DataColumn
                     'model' => $model,
                     'attribute' => $this->attribute,
                     'items' => $this->filter,
-                    'options' => $options
+                    'options' => $options,
+                    'search' => true
                 ]) . ' ' . $error;
             } else {
                 $options = ['class' => 'fluid'];
