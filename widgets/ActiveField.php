@@ -63,7 +63,8 @@ class ActiveField extends \yii\widgets\ActiveField
             'model' => $this->model,
             'attribute' => $this->attribute,
             'items' => $items,
-            'options' => $options
+            'options' => $options,
+            'search' => true
         ]);
         return $this;
     }
