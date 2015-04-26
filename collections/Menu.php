@@ -123,7 +123,8 @@ class Menu extends Widget
             Html::addCssClass($this->options, self::TYPE_BORDERLESS);
         }
 
-        echo Html::tag('div', $this->renderItems(), $this->options);
+        $tag = ArrayHelper::remove($this->options, 'tag', 'div');
+        echo Html::tag($tag, $this->renderItems(), $this->options);
     }
 
     public function renderItems()
