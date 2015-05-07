@@ -1,7 +1,6 @@
 {
     "name": "zelenin/yii2-semantic-ui",
     "description": "Semantic UI extension for Yii2",
-    "version": "0.2.3",
     "type": "yii2-extension",
     "keywords": [
         "yii2",
@@ -10,7 +9,6 @@
         "semantic ui"
     ],
     "homepage": "https://github.com/zelenin/yii2-semantic-ui",
-    "time": "2015-05-01",
     "license": "MIT",
     "authors": [
         {
