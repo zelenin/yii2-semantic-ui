@@ -21,7 +21,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     public function init()
     {
-        if (!in_array($this->size, $this->getSizes())) {
+        if (!in_array($this->size, $this->getSizes(), true)) {
             throw new InvalidConfigException('Invalid size: ' . $this->size);
         }
 
@@ -33,6 +33,26 @@ class ActiveForm extends \yii\widgets\ActiveForm
             Html::addCssClass($this->options, 'inverted');
         }
         parent::init();
+    }
+
+    public function run()
+    {
+        parent::run();
+
+        $this->getView()->registerJs('
+jQuery("#' . $this->getId() . '").on("afterValidateAttribute", function(event, attribute, message) {
+var $form = $(this),
+    hasError = message.length > 0,
+    $container = $form.find(attribute.container),
+    $error = $container.find(attribute.error);
+
+    if (hasError) {
+        $error.removeClass("hidden");
+    } else {
+        $error.addClass("hidden");
+    }
+});
+');
     }
 
     public function getSizes()

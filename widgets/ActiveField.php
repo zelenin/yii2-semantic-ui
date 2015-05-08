@@ -16,8 +16,19 @@ class ActiveField extends \yii\widgets\ActiveField
     public $options = ['class' => 'field'];
     public $inputOptions = [];
 
+    public $errorOptions = ['class' => 'ui red pointing label'];
+    public $hintOptions = ['class' => 'ui pointing label'];
+
     public $template = "{label}\n{input}\n{hint}\n{error}";
     public $checkboxTemplate = '<div class="ui checkbox">{input}{label}{hint}{error}</div>';
+
+    public function render($content = null)
+    {
+        if ($content === null && !isset($this->parts['{error}']) && !$this->model->hasErrors($this->attribute)) {
+            Html::addCssClass($this->errorOptions, 'hidden');
+        }
+        return parent::render($content);
+    }
 
     public function checkbox($options = [], $enclosedByLabel = true)
     {
