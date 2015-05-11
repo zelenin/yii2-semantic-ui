@@ -6,7 +6,6 @@ use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\View;
-use Zelenin\yii\SemanticUI\Elements;
 use Zelenin\yii\SemanticUI\InputWidget;
 
 class Dropdown extends InputWidget
@@ -34,6 +33,8 @@ class Dropdown extends InputWidget
     const TYPE_UPWARD = 'upward';
 
     public $defaultText;
+
+    public $icon = '<i class="dropdown icon"></i>';
 
     public function run()
     {
@@ -79,7 +80,7 @@ class Dropdown extends InputWidget
     public function renderDropdown()
     {
         return
-            Elements::icon('dropdown') .
+            $this->icon .
             Html::tag('div', $this->renderItems(), ['class' => 'menu']);
     }
 
