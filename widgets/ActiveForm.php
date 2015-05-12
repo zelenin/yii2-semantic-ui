@@ -13,7 +13,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     public $fieldClass = 'Zelenin\yii\SemanticUI\widgets\ActiveField';
     public $options = ['class' => 'ui form'];
-    public $errorCssClass = 'error';
+    public $errorCssClass = 'error2';
     public $successCssClass = 'success';
 
     public $size = self::SIZE_NORMAL;
@@ -33,26 +33,6 @@ class ActiveForm extends \yii\widgets\ActiveForm
             Html::addCssClass($this->options, 'inverted');
         }
         parent::init();
-    }
-
-    public function run()
-    {
-        parent::run();
-
-        $this->getView()->registerJs('
-jQuery("#' . $this->getId() . '").on("afterValidateAttribute", function(event, attribute, message) {
-    var $form = $(this),
-        hasError = message.length > 0,
-        $container = $form.find(attribute.container),
-        $error = $container.find(attribute.error);
-
-    if (hasError) {
-        $error.removeClass("hidden");
-    } else {
-        $error.addClass("hidden");
-    }
-});
-');
     }
 
     public function getSizes()

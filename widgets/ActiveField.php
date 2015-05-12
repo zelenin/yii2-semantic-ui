@@ -16,20 +16,31 @@ class ActiveField extends \yii\widgets\ActiveField
     public $options = ['class' => 'field'];
     public $inputOptions = [];
 
-    public $errorOptions = ['class' => 'error-field ui red pointing label'];
+    public $errorOptions = ['class' => 'ui red pointing label'];
     public $hintOptions = ['class' => 'ui pointing label'];
 
     public $template = "{label}\n{input}\n{hint}\n{error}";
     public $checkboxTemplate = '<div class="ui checkbox">{input}{label}{hint}{error}</div>';
 
-    public $selectors = ['error' => '.error-field'];
-
     public function render($content = null)
     {
-        if ($content === null && !isset($this->parts['{error}']) && !$this->model->hasErrors($this->attribute)) {
-            Html::addCssClass($this->errorOptions, 'hidden');
-        }
+        $this->registerStyles();
         return parent::render($content);
+    }
+
+    public function registerStyles()
+    {
+        $classNamesToSelectors = function ($classNames) {
+            return '.' . implode('.', preg_split('/\s+/', $classNames, -1, PREG_SPLIT_NO_EMPTY));
+        };
+        $this->form->getView()->registerCss('
+        ' . $classNamesToSelectors($this->errorOptions['class']) . ' {
+            display: none;
+        }
+        ' . $classNamesToSelectors($this->form->errorCssClass) . ' ' . $classNamesToSelectors($this->errorOptions['class']) . ' {
+            display: inline-block;
+        }
+        ');
     }
 
     public function checkbox($options = [], $enclosedByLabel = true)
