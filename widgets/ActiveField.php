@@ -16,11 +16,13 @@ class ActiveField extends \yii\widgets\ActiveField
     public $options = ['class' => 'field'];
     public $inputOptions = [];
 
-    public $errorOptions = ['class' => 'ui red pointing label'];
+    public $errorOptions = ['class' => 'error-field ui red pointing label'];
     public $hintOptions = ['class' => 'ui pointing label'];
 
     public $template = "{label}\n{input}\n{hint}\n{error}";
     public $checkboxTemplate = '<div class="ui checkbox">{input}{label}{hint}{error}</div>';
+
+    public $selectors = ['error' => '.error-field'];
 
     public function render($content = null)
     {
