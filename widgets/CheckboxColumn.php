@@ -3,6 +3,7 @@
 namespace Zelenin\yii\SemanticUI\widgets;
 
 use Closure;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use Zelenin\yii\SemanticUI\modules\Checkbox;
 
@@ -42,6 +43,7 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
                 $options['value'] = is_array($key) ? Json::encode($key) : $key;
             }
         }
+        $options['id'] = ArrayHelper::getValue($options, 'id', rtrim($this->name, '[]') . '-' . $key);
         return Checkbox::widget([
             'name' => $this->name,
             'checked' => !empty($options['checked']),
