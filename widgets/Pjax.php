@@ -3,6 +3,7 @@
 namespace Zelenin\yii\SemanticUI\widgets;
 
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 use Zelenin\yii\SemanticUI\Elements;
 
 class Pjax extends \yii\widgets\Pjax
@@ -22,10 +23,15 @@ class Pjax extends \yii\widgets\Pjax
     {
         parent::registerClientScript();
         $this->getView()->registerJs('
-        var pjaxLoader = "' . addslashes($this->loader) . '";
-        jQuery(document).on("pjax:start", function() {
-            jQuery("#' . $this->options['id'] . '").append(pjaxLoader);
+        var pjaxLoader_' . $this->getSanitizedId() . ' = "' . addslashes($this->loader) . '";
+        jQuery(document).on("pjax:start", "#' . $this->options['id'] . '", function() {
+            jQuery("#' . $this->options['id'] . '").append(pjaxLoader_' . $this->getSanitizedId() . ');
         });
         ');
+    }
+
+    private function getSanitizedId()
+    {
+        return Inflector::camelize($this->options['id']);
     }
 }
