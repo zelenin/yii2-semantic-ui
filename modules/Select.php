@@ -28,6 +28,9 @@ class Select extends InputWidget
     public $upward = false;
     const TYPE_UPWARD = 'upward';
 
+    public $multiple = false;
+    const TYPE_MULTIPLE = 'multiple';
+    
     public function run()
     {
         $this->registerJs();
@@ -49,7 +52,10 @@ class Select extends InputWidget
         if ($this->upward) {
             Html::addCssClass($this->options, self::TYPE_UPWARD);
         }
-
+        if ($this->multiple) {
+            Html::addCssClass($this->options, self::TYPE_MULTIPLE);
+        }
+        
         echo $this->hasModel()
             ? Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options)
             : Html::dropDownList($this->name, $this->selection, $this->items, $this->options);
