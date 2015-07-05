@@ -7,6 +7,9 @@ use yii\web\AssetBundle;
 
 class SemanticUICSSAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/bower/semantic/dist';
 
     public function init()

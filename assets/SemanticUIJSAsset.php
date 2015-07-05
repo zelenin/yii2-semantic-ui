@@ -7,8 +7,14 @@ use yii\web\AssetBundle;
 
 class SemanticUIJSAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@vendor/bower/semantic/dist';
 
+    /**
+     * @var array
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'Zelenin\yii\SemanticUI\assets\SemanticUICSSAsset'
