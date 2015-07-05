@@ -9,24 +9,45 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Message extends Widget
 {
+    /**
+     * @var bool
+     */
     public $icon = false;
     const TYPE_ICON = 'icon';
 
+    /**
+     * @var bool
+     */
     public $hidden = false;
     const TYPE_HIDDEN = 'hidden';
 
+    /**
+     * @var bool
+     */
     public $visible = false;
     const TYPE_VISIBLE = 'visible';
 
+    /**
+     * @var bool
+     */
     public $floating = false;
     const TYPE_FLOATING = 'floating';
 
+    /**
+     * @var bool
+     */
     public $compact = false;
     const TYPE_COMPACT = 'compact';
 
+    /**
+     * @var bool
+     */
     public $attached = false;
     const TYPE_ATTACHED = 'attached';
 
+    /**
+     * @var string
+     */
     public $type;
     const TYPE_WARNING = 'warning';
     const TYPE_INFO = 'info';
@@ -35,22 +56,15 @@ class Message extends Widget
     const TYPE_NEGATIVE = 'negative';
     const TYPE_ERROR = 'error';
 
+    /**
+     * @var string
+     */
     public $size;
-    const SIZE_SMALL = 'small';
-    const SIZE_LARGE = 'large';
-    const SIZE_HUGE = 'huge';
-    const SIZE_MASSIVE = 'massive';
 
+    /**
+     * @var string
+     */
     public $color;
-    const COLOR_BLACK = 'black';
-    const COLOR_YELLOW = 'yellow';
-    const COLOR_GREEN = 'green';
-    const COLOR_BLUE = 'blue';
-    const COLOR_ORANGE = 'orange';
-    const COLOR_PURPLE = 'purple';
-    const COLOR_PINK = 'pink';
-    const COLOR_RED = 'red';
-    const COLOR_TEAL = 'teal';
 
     public function init()
     {
@@ -93,6 +107,11 @@ class Message extends Widget
         echo Html::endTag('div');
     }
 
+    /**
+     * @param array $options
+     *
+     * @return string
+     */
     public function renderCloseButton($options = [])
     {
         if (!isset($options['id'])) {
