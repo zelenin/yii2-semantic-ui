@@ -9,21 +9,39 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Shape extends Widget
 {
+    /**
+     * @var array
+     */
     public $sides = [];
 
+    /**
+     * @var string
+     */
     public $type;
     const TYPE_CUBE = 'cube';
     const TYPE_TEXT = 'text';
 
+    /**
+     * @var bool
+     */
     public $fluid = false;
     const TYPE_FLUID = 'fluid';
 
+    /**
+     * @var bool
+     */
     public $compact = false;
     const TYPE_COMPACT = 'compact';
 
+    /**
+     * @var bool
+     */
     public $disabled = false;
     const TYPE_DISABLED = 'disabled';
 
+    /**
+     * @var bool
+     */
     public $upward = false;
     const TYPE_UPWARD = 'upward';
 
@@ -40,6 +58,9 @@ class Shape extends Widget
         echo Html::tag('div', Html::tag('div', $this->renderSides(), ['class' => 'sides']), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderSides()
     {
         $sides = '';
@@ -49,6 +70,10 @@ class Shape extends Widget
         return $sides;
     }
 
+    /**
+     * @param array $side
+     * @return string
+     */
     public function renderSide($side)
     {
         $sideOptions = ['class' => 'side'];
@@ -58,6 +83,10 @@ class Shape extends Widget
         return Html::tag('div', $side['content'], $sideOptions);
     }
 
+    /**
+     * @param array $sides
+     * @return array
+     */
     public function normalizeSides($sides)
     {
         $items = [];

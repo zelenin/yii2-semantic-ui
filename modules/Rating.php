@@ -9,17 +9,17 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Rating extends Widget
 {
+    /**
+     * @var string
+     */
     public $type;
     const TYPE_STAR = 'star';
     const TYPE_HEART = 'heart';
 
+    /**
+     * @var string
+     */
     public $size;
-    const SIZE_MINY = 'miny';
-    const SIZE_TINY = 'tiny';
-    const SIZE_SMALL = 'small';
-    const SIZE_LARGE = 'large';
-    const SIZE_HUGE = 'huge';
-    const SIZE_MASSIVE = 'massive';
 
     public function run()
     {

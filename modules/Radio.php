@@ -7,6 +7,9 @@ use yii\helpers\Html;
 
 class Radio extends Checkbox
 {
+    /**
+     * @var string
+     */
     public $type = self::TYPE_RADIO;
     const TYPE_RADIO = 'radio';
 

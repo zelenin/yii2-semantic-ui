@@ -8,6 +8,9 @@ use yii\helpers\Html;
 
 class RadioList extends CheckboxList
 {
+    /**
+     * @return string
+     */
     public function renderInput()
     {
         return $this->hasModel()
@@ -15,6 +18,9 @@ class RadioList extends CheckboxList
             : Html::radioList($this->name, $this->selection, $this->items, $this->options);
     }
 
+    /**
+     * @return callable
+     */
     public function getDefaultItem()
     {
         return function ($index, $label, $name, $checked, $value) {
