@@ -17,12 +17,6 @@ class Elements
         return static::renderElement('buttons', $content, $options);
     }
 
-    public static function icon($icon, $options = [])
-    {
-        Html::addCssClass($options, $icon . ' icon');
-        return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
-    }
-
     public static function divider($content = '', $options = [])
     {
         return static::renderElement('divider', $content, $options);
@@ -31,6 +25,12 @@ class Elements
     public static function flag($flag, $options = [])
     {
         Html::addCssClass($options, $flag . ' flag');
+        return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
+    }
+
+    public static function icon($icon, $options = [])
+    {
+        Html::addCssClass($options, $icon . ' icon');
         return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
     }
 
