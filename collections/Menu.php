@@ -11,65 +11,138 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Menu extends Widget
 {
+    /**
+     * @var string
+     */
     public $route;
+
+    /**
+     * @var array
+     */
     public $params;
 
+    /**
+     * @var array
+     */
     public $items = [];
+
+    /**
+     * @var array
+     */
     public $rightMenuItems = [];
+
+    /**
+     * @var array
+     */
     public $subMenuItems = [];
 
+    /**
+     * @var array
+     */
     public $options = [];
+
+    /**
+     * @var array
+     */
     public $rightMenuOptions = [];
+
+    /**
+     * @var array
+     */
     public $subMenuOptions = [];
 
+    /**
+     * @var array
+     */
     public $itemOptions = [];
 
+    /**
+     * @var bool
+     */
     public $vertical = false;
     const TYPE_VERTICAL = 'vertical';
 
+    /**
+     * @var bool
+     */
     public $tabular = false;
     const TYPE_TABULAR = 'tabular';
 
+    /**
+     * @var bool
+     */
     public $topAttached = false;
     const TYPE_TOP_ATTACHED = 'top attached';
 
+    /**
+     * @var bool
+     */
     public $tiered = false;
     const TYPE_TIERED = 'tiered';
 
+    /**
+     * @var bool
+     */
     public $secondary = false;
     const TYPE_SECONDARY = 'secondary';
 
+    /**
+     * @var bool
+     */
     public $pointing = false;
     const TYPE_POINTING = 'pointing';
 
+    /**
+     * @var bool
+     */
     public $text = false;
     const TYPE_TEXT = 'text';
 
+    /**
+     * @var bool
+     */
     public $fluid = false;
     const TYPE_FLUID = 'fluid';
-
+    /**
+     * @var bool
+     */
     public $borderless = false;
     const TYPE_BORDERLESS = 'borderless';
 
+    /**
+     * @var bool
+     */
     public $inverted = false;
     const TYPE_INVERTED = 'inverted';
 
+    /**
+     * @var string
+     */
     public $color;
-    const COLOR_GREEN = 'green';
-    const COLOR_RED = 'red';
-    const COLOR_BLUE = 'blue';
-    const COLOR_ORANGE = 'orange';
-    const COLOR_PURPLE = 'purple';
-    const COLOR_TEAL = 'teal';
 
+    /**
+     * @var string
+     */
     public $size;
-    const SIZE_SMALL = 'small';
-    const SIZE_LARGE = 'large';
 
+    /**
+     * @var bool
+     */
     public $encodeLabels = true;
 
+    /**
+     * @var bool
+     */
     public $activateItems = true;
+
+    /**
+     * @var bool
+     */
     public $activateParents = false;
+
+    /**
+     * @var bool
+     */
     public $hideEmptyItems = true;
 
     public function init()
@@ -127,6 +200,9 @@ class Menu extends Widget
         echo Html::tag($tag, $this->renderItems(), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderItems()
     {
         Html::addCssClass($this->rightMenuOptions, 'right menu');
@@ -141,6 +217,11 @@ class Menu extends Widget
             ($this->subMenuItems ? Html::tag('div', $this->renderMenuPart($this->subMenuItems), $this->subMenuOptions) : '');
     }
 
+    /**
+     * @param $items
+     *
+     * @return string
+     */
     public function renderMenuPart($items)
     {
         if ($items) {
@@ -156,8 +237,8 @@ class Menu extends Widget
                 if (isset($item['items'])) {
                     Html::addCssClass($item['options'], 'ui simple dropdown');
                     $item['label'] =
-                        Elements::icon('dropdown') .
                         $item['label'] .
+                        Elements::icon('dropdown') .
                         Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
                     $menu = $this->renderItem($item);
                 } else {
@@ -171,6 +252,11 @@ class Menu extends Widget
         }
     }
 
+    /**
+     * @param $item
+     *
+     * @return string
+     */
     public function renderItem($item)
     {
         if (isset($item['header'])) {
@@ -185,6 +271,12 @@ class Menu extends Widget
         }
     }
 
+    /**
+     * @param array $items
+     * @param bool $active
+     *
+     * @return array
+     */
     protected function normalizeItems($items, &$active)
     {
         foreach ($items as $i => $item) {
@@ -224,6 +316,11 @@ class Menu extends Widget
         return array_values($items);
     }
 
+    /**
+     * @param array $item
+     *
+     * @return bool
+     */
     protected function isItemActive($item)
     {
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
