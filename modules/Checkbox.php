@@ -67,7 +67,7 @@ class Checkbox extends InputWidget
     public function renderLabel()
     {
         if (!isset($this->labelOptions['for'])) {
-            $this->labelOptions['for'] = $this->inputOptions['id'];
+            $this->labelOptions['for'] = ($this->hasModel() ? $this->attribute : $this->name);
         }
         return $this->hasModel()
             ? Html::activeLabel($this->model, $this->attribute, $this->labelOptions)
