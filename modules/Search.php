@@ -10,17 +10,32 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Search extends Widget
 {
+    /**
+     * @var string
+     */
     public $input;
 
+    /**
+     * @var bool
+     */
     public $loading = true;
     const TYPE_LOADING = 'loading';
 
+    /**
+     * @var bool
+     */
     public $fluid = false;
     const TYPE_FLUID = 'fluid';
 
+    /**
+     * @var bool
+     */
     public $category = false;
     const TYPE_CATEGORY = 'category';
 
+    /**
+     * @var bool
+     */
     public $rightAligned = false;
     const TYPE_RIGHT_ALIGNED = 'right aligned';
 
@@ -45,11 +60,17 @@ class Search extends Widget
         echo Html::tag('div', $this->renderInput() . $this->renderResults(), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderInput()
     {
         return $this->input ?: Elements::input(Html::input('text', null, null, ['class' => 'prompt']));
     }
 
+    /**
+     * @return string
+     */
     public function renderResults()
     {
         return Html::tag('div', null, ['class' => 'results']);
