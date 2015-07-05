@@ -11,22 +11,44 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Accordion extends Widget
 {
+    /**
+     * @var array
+     */
     public $items = [];
 
+    /**
+     * @var array
+     */
     public $titleOptions = [];
+
+    /**
+     * @var array
+     */
     public $contentOptions = [];
 
-    const TYPE_STYLED = 'styled';
+    /**
+     * @var bool
+     */
     public $styled = false;
+    const TYPE_STYLED = 'styled';
 
-    const TYPE_FLUID = 'fluid';
+    /**
+     * @var bool
+     */
     public $fluid = false;
+    const TYPE_FLUID = 'fluid';
 
-    const TYPE_VERTICAL = 'vertical';
+    /**
+     * @var bool
+     */
     public $vertical = false;
+    const TYPE_VERTICAL = 'vertical';
 
-    const TYPE_INVERTED = 'inverted';
+    /**
+     * @var bool
+     */
     public $inverted = false;
+    const TYPE_INVERTED = 'inverted';
 
     public function run()
     {
@@ -50,6 +72,9 @@ class Accordion extends Widget
         }
     }
 
+    /**
+     * @return string
+     */
     public function renderItems()
     {
         $items = '';
@@ -59,11 +84,21 @@ class Accordion extends Widget
         return $items;
     }
 
+    /**
+     * @param array $item
+     *
+     * @return string
+     */
     public function renderItem($item)
     {
         return $this->renderTitle($item) . $this->renderContent($item);
     }
 
+    /**
+     * @param array $item
+     *
+     * @return string
+     */
     public function renderTitle($item)
     {
         $encode = ArrayHelper::getValue($this->titleOptions, 'encode', true);
@@ -76,6 +111,11 @@ class Accordion extends Widget
         return Html::tag('div', $title, $options);
     }
 
+    /**
+     * @param array $item
+     *
+     * @return string
+     */
     public function renderContent($item)
     {
         $encode = ArrayHelper::getValue($this->contentOptions, 'encode', true);
@@ -88,6 +128,11 @@ class Accordion extends Widget
         return Html::tag('div', $content, $options);
     }
 
+    /**
+     * @param array $item
+     *
+     * @return array
+     */
     public function normalizeItem($item)
     {
         $item['active'] = ArrayHelper::remove($item, 'active', false);
