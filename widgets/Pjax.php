@@ -8,6 +8,9 @@ use Zelenin\yii\SemanticUI\Elements;
 
 class Pjax extends \yii\widgets\Pjax
 {
+    /**
+     * @var string
+     */
     public $loader;
 
     public function init()
@@ -30,6 +33,9 @@ class Pjax extends \yii\widgets\Pjax
         ');
     }
 
+    /**
+     * @return string
+     */
     private function getSanitizedId()
     {
         return Inflector::camelize($this->options['id']);
