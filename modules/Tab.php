@@ -10,11 +10,26 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Tab extends Widget
 {
+    /**
+     * @var array
+     */
     public $items = [];
+
+    /**
+     * @var array
+     */
     public $labelOptions = [];
+
+    /**
+     * @var array
+     */
     public $contentOptions = [
         'class' => 'bottom attached segment'
     ];
+
+    /**
+     * @var array
+     */
     public $options = [
         'class' => 'ui top attached tabular menu'
     ];
@@ -29,6 +44,9 @@ class Tab extends Widget
         echo $this->renderMenu() . $this->renderTabs();
     }
 
+    /**
+     * @return string
+     */
     public function renderMenu()
     {
         $items = '';
@@ -43,6 +61,9 @@ class Tab extends Widget
         return Html::tag('div', $items, $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderTabs()
     {
         $items = '';
