@@ -10,30 +10,67 @@ use Zelenin\yii\SemanticUI\InputWidget;
 
 class Dropdown extends InputWidget
 {
+    /**
+     * @var array
+     */
     public $items = [];
+
+    /**
+     * @var mixed
+     */
     public $selection = null;
 
+    /**
+     * @var string
+     */
     public $type = self::TYPE_SELECTION;
     const TYPE_DEFAULT = '';
     const TYPE_SELECTION = 'selection';
 
+    /**
+     * @var bool
+     */
     public $search = false;
     const TYPE_SEARCH = 'search';
 
+    /**
+     * @var bool
+     */
     public $fluid = false;
     const TYPE_FLUID = 'fluid';
 
+    /**
+     * @var bool
+     */
     public $compact = false;
     const TYPE_COMPACT = 'compact';
 
+    /**
+     * @var bool
+     */
     public $disabled = false;
     const TYPE_DISABLED = 'disabled';
 
+    /**
+     * @var bool
+     */
     public $upward = false;
     const TYPE_UPWARD = 'upward';
 
+    /**
+     * @var bool
+     */
+    public $multiple = false;
+    const TYPE_MULTIPLE = 'multiple';
+
+    /**
+     * @var string
+     */
     public $defaultText;
 
+    /**
+     * @var string
+     */
     public $icon = '<i class="dropdown icon"></i>';
 
     public function run()
@@ -57,6 +94,9 @@ class Dropdown extends InputWidget
         if ($this->upward) {
             Html::addCssClass($this->options, self::TYPE_UPWARD);
         }
+        if ($this->multiple) {
+            Html::addCssClass($this->options, self::TYPE_MULTIPLE);
+        }
 
         echo Html::tag(
             'div',
@@ -65,6 +105,9 @@ class Dropdown extends InputWidget
         );
     }
 
+    /**
+     * @return string
+     */
     public function renderHiddenInput()
     {
         return $this->hasModel()
@@ -72,11 +115,17 @@ class Dropdown extends InputWidget
             : Html::hiddenInput($this->name, $this->selection, []);
     }
 
+    /**
+     * @return string
+     */
     public function renderText()
     {
         return Html::tag('div', $this->defaultText, ['class' => 'default text']);
     }
 
+    /**
+     * @return string
+     */
     public function renderDropdown()
     {
         return
@@ -84,6 +133,9 @@ class Dropdown extends InputWidget
             Html::tag('div', $this->renderItems(), ['class' => 'menu']);
     }
 
+    /**
+     * @return string
+     */
     public function renderItems()
     {
         $items = '';
@@ -103,16 +155,30 @@ class Dropdown extends InputWidget
         return $items;
     }
 
+    /**
+     * @param string $item
+     *
+     * @return string
+     */
     public function renderHeader($item)
     {
         return Html::tag('div', $item, ['class' => 'header']);
     }
 
+    /**
+     * @return string
+     */
     public function renderDivider()
     {
         return Html::tag('div', '', ['class' => 'divider']);
     }
 
+    /**
+     * @param string $key
+     * @param string $item
+     *
+     * @return string
+     */
     public function renderItem($key, $item)
     {
         return Html::tag('div', $item, [

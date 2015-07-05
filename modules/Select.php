@@ -10,23 +10,50 @@ use Zelenin\yii\SemanticUI\InputWidget;
 
 class Select extends InputWidget
 {
+    /**
+     * @var array
+     */
     public $items = [];
+
+    /**
+     * @var mixed
+     */
     public $selection = null;
 
+    /**
+     * @var bool
+     */
     public $search = false;
     const TYPE_SEARCH = 'search';
 
+    /**
+     * @var bool
+     */
     public $fluid = false;
     const TYPE_FLUID = 'fluid';
 
+    /**
+     * @var bool
+     */
     public $compact = false;
     const TYPE_COMPACT = 'compact';
 
+    /**
+     * @var bool
+     */
     public $disabled = false;
     const TYPE_DISABLED = 'disabled';
 
+    /**
+     * @var bool
+     */
     public $upward = false;
     const TYPE_UPWARD = 'upward';
+
+    /**
+     * @var bool
+     */
+    public $multiple = false;
 
     public function run()
     {
@@ -48,6 +75,9 @@ class Select extends InputWidget
         }
         if ($this->upward) {
             Html::addCssClass($this->options, self::TYPE_UPWARD);
+        }
+        if ($this->multiple) {
+            $this->options['multiple'] = true;
         }
 
         echo $this->hasModel()
