@@ -9,9 +9,19 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Progress extends Widget
 {
+    /**
+     * @var string
+     */
     public $label;
+
+    /**
+     * @var string
+     */
     public $progress;
 
+    /**
+     * @var string
+     */
     public $state;
     const STATE_ACTIVE = 'active';
     const STATE_SUCCESS = 'success';
@@ -19,31 +29,34 @@ class Progress extends Widget
     const STATE_ERROR = 'error';
     const STATE_DISABLED = 'disabled';
 
+    /**
+     * @var bool
+     */
     public $inverted = false;
     const TYPE_INVERTED = 'inverted';
 
+    /**
+     * @var bool
+     */
     public $indicating = false;
     const TYPE_INDICATING = 'indicating';
 
+    /**
+     * @var string
+     */
     public $attached;
     const ATTACHED_TOP = 'top attached';
     const ATTACHED_BOTTOM = 'bottom attached';
 
+    /**
+     * @var string
+     */
     public $size;
-    const SIZE_TINY = 'tiny';
-    const SIZE_SMALL = 'small';
-    const SIZE_LARGE = 'large';
-    const SIZE_BIG = 'big';
 
+    /**
+     * @var string
+     */
     public $color;
-    const COLOR_BLACK = 'black';
-    const COLOR_BLUE = 'blue';
-    const COLOR_GREEN = 'green';
-    const COLOR_ORANGE = 'orange';
-    const COLOR_PINK = 'pink';
-    const COLOR_RED = 'red';
-    const COLOR_TEAL = 'teal';
-    const COLOR_YELLOW = 'yellow';
 
     public function run()
     {
@@ -51,33 +64,39 @@ class Progress extends Widget
 
         Html::addCssClass($this->options, 'ui progress');
 
-        if($this->indicating) {
+        if ($this->indicating) {
             Html::addCssClass($this->options, self::TYPE_INDICATING);
         }
-        if($this->inverted) {
+        if ($this->inverted) {
             Html::addCssClass($this->options, self::TYPE_INVERTED);
         }
-        if($this->attached) {
+        if ($this->attached) {
             Html::addCssClass($this->options, $this->attached);
         }
-        if($this->size) {
+        if ($this->size) {
             Html::addCssClass($this->options, $this->size);
         }
-        if($this->state) {
+        if ($this->state) {
             Html::addCssClass($this->options, $this->state);
         }
-        if($this->color) {
+        if ($this->color) {
             Html::addCssClass($this->options, $this->color);
         }
 
         echo Html::tag('div', $this->renderBar() . $this->renderLabel(), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderBar()
     {
         return Html::tag('div', $this->renderProgress(), ['class' => 'bar']);;
     }
 
+    /**
+     * @return string
+     */
     public function renderLabel()
     {
         if ($this->label) {
@@ -87,6 +106,9 @@ class Progress extends Widget
         }
     }
 
+    /**
+     * @return string
+     */
     public function renderProgress()
     {
         if ($this->progress) {
