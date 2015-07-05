@@ -12,15 +12,15 @@ class Elements
         return static::renderElement('button', $content, $options);
     }
 
+    public static function buttonsGroup($content, $options = [])
+    {
+        return static::renderElement('buttons', $content, $options);
+    }
+
     public static function icon($icon, $options = [])
     {
         Html::addCssClass($options, $icon . ' icon');
         return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
-    }
-
-    public static function buttonsGroup($content, $options = [])
-    {
-        return static::renderElement('buttons', $content, $options);
     }
 
     public static function divider($content = '', $options = [])
@@ -114,6 +114,7 @@ class Elements
      * @param string $type
      * @param string $content
      * @param array $options
+     *
      * @return string
      */
     public static function renderElement($type, $content, $options = [])
