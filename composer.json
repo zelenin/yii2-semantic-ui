@@ -23,8 +23,8 @@
         "source": "https://github.com/zelenin/yii2-semantic-ui"
     },
     "require": {
-        "yiisoft/yii2": "2.*",
-        "bower-asset/semantic": "1.*"
+        "yiisoft/yii2": "~2",
+        "bower-asset/semantic": "~2"
     },
     "autoload": {
         "psr-4": {
