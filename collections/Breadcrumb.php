@@ -9,19 +9,37 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Breadcrumb extends Widget
 {
+    /**
+     * @var array
+     */
     public $links = [];
+
+    /**
+     * @var array|null|false
+     */
     public $homeLink;
+
+    /**
+     * @var array
+     */
     public $itemOptions = [];
+
+    /**
+     * @var bool
+     */
     public $encodeLabels = true;
 
+    /**
+     * @var string
+     */
     public $divider = self::DIVIDER_NORMAL;
     const DIVIDER_NORMAL = ' <div class="divider"> / </div> ';
     const DIVIDER_CHEVRON = ' <i class="right chevron icon divider"></i> ';
 
+    /**
+     * @var string
+     */
     public $size;
-    const SIZE_SMALL = 'small';
-    const SIZE_LARGE = 'large';
-    const SIZE_HUGE = 'huge';
 
     public function run()
     {
@@ -33,6 +51,9 @@ class Breadcrumb extends Widget
         echo Html::tag('div', $this->renderItems(), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderItems()
     {
         $items = [];
@@ -51,6 +72,9 @@ class Breadcrumb extends Widget
         return implode($this->divider, $items);
     }
 
+    /**
+     * @return bool|string
+     */
     private function getHomeLink()
     {
         if ($this->homeLink === null) {
@@ -64,6 +88,11 @@ class Breadcrumb extends Widget
             : false;
     }
 
+    /**
+     * @param array $item
+     *
+     * @return string
+     */
     protected function renderItem($item)
     {
         $item['label'] = $this->encodeLabels ? Html::encode($item['label']) : $item['label'];
