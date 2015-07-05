@@ -7,15 +7,15 @@ use yii\helpers\Html;
 
 class Elements
 {
+    public static function button($content, $options = [])
+    {
+        return static::renderElement('button', $content, $options);
+    }
+
     public static function icon($icon, $options = [])
     {
         Html::addCssClass($options, $icon . ' icon');
         return Html::tag(ArrayHelper::remove($options, 'tag', 'i'), '', $options);
-    }
-
-    public static function button($content, $options = [])
-    {
-        return static::renderElement('button', $content, $options);
     }
 
     public static function buttonsGroup($content, $options = [])
@@ -118,7 +118,11 @@ class Elements
      */
     public static function renderElement($type, $content, $options = [])
     {
-        Html::addCssClass($options, 'ui ' . ArrayHelper::remove($options, 'class') . ' ' . $type);
-        return Html::tag(ArrayHelper::remove($options, 'tag', 'div'), $content, $options);
+        $tag = ArrayHelper::remove($options, 'tag', 'div');
+
+        $class = ArrayHelper::remove($options, 'class');
+        Html::addCssClass($options, 'ui ' . $class . ' ' . $type);
+
+        return Html::tag($tag, $content, $options);
     }
 }
