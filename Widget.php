@@ -6,7 +6,14 @@ use Zelenin\yii\SemanticUI\assets\SemanticUIJSAsset;
 
 class Widget extends \yii\base\Widget
 {
+    /**
+     * @var array
+     */
     public $options = [];
+
+    /**
+     * @var array
+     */
     public $clientOptions = [];
 
     public function init()
