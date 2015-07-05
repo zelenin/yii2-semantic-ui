@@ -9,11 +9,20 @@ use Zelenin\yii\SemanticUI\Widget;
 
 class Sidebar extends Widget
 {
+    /**
+     * @var string
+     */
     public $content;
 
+    /**
+     * @var bool
+     */
     public $visible = false;
     const TYPE_VISIBLE = 'visible';
 
+    /**
+     * @var string
+     */
     public $width;
     const WIDTH_THIN = 'thin';
     const WIDTH_VERY_THIN = 'very thin';

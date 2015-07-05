@@ -9,23 +9,48 @@ use Zelenin\yii\SemanticUI\InputWidget;
 
 class Checkbox extends InputWidget
 {
+    /**
+     * @var string
+     */
     public $label;
+    /**
+     * @var array
+     */
     public $labelOptions = [];
 
+    /**
+     * @var array
+     */
     public $inputOptions = [];
+
+    /**
+     * @var bool
+     */
     public $checked = false;
 
+    /**
+     * @var string
+     */
     public $type = self::TYPE_CHECKBOX;
     const TYPE_CHECKBOX = '';
     const TYPE_SLIDER = 'slider';
     const TYPE_TOGGLE = 'toggle';
 
+    /**
+     * @var bool
+     */
     public $readOnly = false;
     const TYPE_READONLY = 'read-only';
 
+    /**
+     * @var bool
+     */
     public $disabled = false;
     const TYPE_DISABLED = 'disabled';
 
+    /**
+     * @var bool
+     */
     public $fitted = false;
     const TYPE_FITTED = 'fitted';
 
@@ -48,6 +73,9 @@ class Checkbox extends InputWidget
         echo Html::tag('div', $this->renderInput() . $this->renderLabel(), $this->options);
     }
 
+    /**
+     * @return string
+     */
     public function renderInput()
     {
         $this->inputOptions['label'] = null;
@@ -64,6 +92,9 @@ class Checkbox extends InputWidget
         }
     }
 
+    /**
+     * @return string
+     */
     public function renderLabel()
     {
         if (!isset($this->labelOptions['for'])) {

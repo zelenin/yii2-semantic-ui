@@ -9,11 +9,29 @@ use Zelenin\yii\SemanticUI\InputWidget;
 
 class CheckboxList extends InputWidget
 {
+    /**
+     * @var array
+     */
     public $items = [];
+
+    /**
+     * @var mixed
+     */
     public $selection = null;
 
+    /**
+     * @var array
+     */
     public $labelOptions = [];
+
+    /**
+     * @var array
+     */
     public $inputOptions = [];
+
+    /**
+     * @var array
+     */
     public $listOptions = [];
 
     public function run()
@@ -22,6 +40,9 @@ class CheckboxList extends InputWidget
         echo $this->renderInput();
     }
 
+    /**
+     * @return string
+     */
     public function renderInput()
     {
         return $this->hasModel()
@@ -29,10 +50,13 @@ class CheckboxList extends InputWidget
             : Html::checkboxList($this->name, $this->selection, $this->items, $this->options);
     }
 
+    /**
+     * @return callable
+     */
     public function getDefaultItem()
     {
         return function ($index, $label, $name, $checked, $value) {
-            $inputOptions =  $this->inputOptions;
+            $inputOptions = $this->inputOptions;
             $inputOptions['value'] = ArrayHelper::getValue($inputOptions, 'value', $value);
             return Html::tag(
                 'div',

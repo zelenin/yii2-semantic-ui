@@ -3,6 +3,7 @@
 namespace Zelenin\yii\SemanticUI\widgets;
 
 use Closure;
+use Exception;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\JsExpression;
@@ -10,6 +11,11 @@ use Zelenin\yii\SemanticUI\modules\Checkbox;
 
 class CheckboxColumn extends \yii\grid\CheckboxColumn
 {
+    /**
+     * @return string
+     *
+     * @throws Exception
+     */
     protected function renderHeaderCellContent()
     {
         $name = rtrim($this->name, '[]') . '_all';
@@ -25,11 +31,11 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
                 ],
                 'clientOptions' => [
                     'onChecked' => new JsExpression('function() {
-                        var $childCheckbox = $(this).closest("#' . $this->grid->options['id'] .'").find("input[name=\'' . $this->name . '\']").closest(".checkbox");
+                        var $childCheckbox = $(this).closest("#' . $this->grid->options['id'] . '").find("input[name=\'' . $this->name . '\']").closest(".checkbox");
                         $childCheckbox.checkbox("check");
                     }'),
                     'onUnchecked' => new JsExpression('function() {
-                        var $childCheckbox = $(this).closest("#' . $this->grid->options['id'] .'").find("input[name=\'' . $this->name . '\']").closest(".checkbox");
+                        var $childCheckbox = $(this).closest("#' . $this->grid->options['id'] . '").find("input[name=\'' . $this->name . '\']").closest(".checkbox");
                         $childCheckbox.checkbox("uncheck");
                     }')
                 ]
@@ -37,6 +43,15 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
         }
     }
 
+    /**
+     * @param mixed $model
+     * @param mixed $key
+     * @param int $index
+     *
+     * @return string
+     *
+     * @throws Exception
+     */
     protected function renderDataCellContent($model, $key, $index)
     {
         if ($this->checkboxOptions instanceof Closure) {
@@ -56,7 +71,7 @@ class CheckboxColumn extends \yii\grid\CheckboxColumn
                 'fireOnInit' => true,
                 'onChange' => new JsExpression('function() {
                     var $parentCheckbox = $(".select-on-check-all").closest(".checkbox"),
-                    $checkbox = $("#' . $this->grid->options['id'] .'").find("input[name=\'' . $this->name . '\']").closest(".checkbox"),
+                    $checkbox = $("#' . $this->grid->options['id'] . '").find("input[name=\'' . $this->name . '\']").closest(".checkbox"),
                     allChecked = true,
                     allUnchecked = true;
 
