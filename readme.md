@@ -4,6 +4,8 @@
 
 ## Installation
 
+yii2-semantic-ui 2.* works with Semantic UI 2.*
+
 ### Composer
 
 The preferred way to install this extension is through [Composer](http://getcomposer.org/).
@@ -11,13 +13,13 @@ The preferred way to install this extension is through [Composer](http://getcomp
 Either run
 
 ```
-php composer.phar require zelenin/yii2-semantic-ui "*"
+php composer.phar require zelenin/yii2-semantic-ui "~2"
 ```
 
 or add
 
 ```
-"zelenin/yii2-semantic-ui": "*"
+"zelenin/yii2-semantic-ui": "~2"
 ```
 
 to the require section of your ```composer.json```
@@ -64,10 +66,6 @@ Be very careful with it.
 ### Demo
 
 [Demo site](http://yii2-semantic-ui.zelenin.pw)
-
-### Work in progress
-
-I need your feedback! I need your pull requests!
 
 ## Author
 
