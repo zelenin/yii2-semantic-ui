@@ -3,6 +3,7 @@
 namespace Zelenin\yii\SemanticUI\widgets;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use Zelenin\yii\SemanticUI\modules\Checkbox;
 use Zelenin\yii\SemanticUI\modules\CheckboxList;
@@ -82,13 +83,15 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public function dropDownList($items, $options = [])
     {
+        $multiple = ArrayHelper::remove($options, 'multiple', 'false');
         $this->parts['{input}'] = Dropdown::widget([
             'class' => Dropdown::className(),
             'model' => $this->model,
             'attribute' => $this->attribute,
             'items' => $items,
             'options' => $options,
-            'search' => true
+            'search' => true,
+            'multiple' => $multiple
         ]);
         return $this;
     }
