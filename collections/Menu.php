@@ -207,12 +207,15 @@ class Menu extends Widget
     {
         Html::addCssClass($this->rightMenuOptions, 'right menu');
         Html::addCssClass($this->subMenuOptions, 'ui sub menu');
+
+        $leftMenuPart = $this->items ? $this->renderMenuPart($this->items) : '';
+        $rightMenuPart = $this->rightMenuItems ? Html::tag('div', $this->renderMenuPart($this->rightMenuItems), $this->rightMenuOptions) : '';
         return
             (
             $this->tiered
                 ?
-                Html::tag('div', $this->renderMenuPart($this->items) . Html::tag('div', $this->renderMenuPart($this->rightMenuItems), $this->rightMenuOptions), ['class' => 'menu'])
-                : $this->renderMenuPart($this->items) . Html::tag('div', $this->renderMenuPart($this->rightMenuItems), $this->rightMenuOptions)
+                Html::tag('div', $leftMenuPart . $rightMenuPart, ['class' => 'menu'])
+                : $leftMenuPart . $rightMenuPart
             ) .
             ($this->subMenuItems ? Html::tag('div', $this->renderMenuPart($this->subMenuItems), $this->subMenuOptions) : '');
     }
@@ -224,32 +227,28 @@ class Menu extends Widget
      */
     public function renderMenuPart($items)
     {
-        if ($items) {
-            $items = $this->normalizeItems($items, $hasActiveChild);
+        $items = $this->normalizeItems($items, $hasActiveChild);
 
-            $lines = '';
-            foreach ($items as $i => $item) {
-                Html::addCssClass($item['options'], 'item');
-                if ($item['active']) {
-                    Html::addCssClass($item['options'], 'active');
-                }
-
-                if (isset($item['items'])) {
-                    Html::addCssClass($item['options'], 'ui simple dropdown');
-                    $item['label'] =
-                        $item['label'] .
-                        Elements::icon('dropdown') .
-                        Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
-                    $menu = $this->renderItem($item);
-                } else {
-                    $menu = $this->renderItem($item);
-                }
-                $lines .= $menu;
+        $lines = '';
+        foreach ($items as $i => $item) {
+            Html::addCssClass($item['options'], 'item');
+            if ($item['active']) {
+                Html::addCssClass($item['options'], 'active');
             }
-            return $lines;
-        } else {
-            return '';
+
+            if (isset($item['items'])) {
+                Html::addCssClass($item['options'], 'ui simple dropdown');
+                $item['label'] =
+                    $item['label'] .
+                    Elements::icon('dropdown') .
+                    Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
+                $menu = $this->renderItem($item);
+            } else {
+                $menu = $this->renderItem($item);
+            }
+            $lines .= $menu;
         }
+        return $lines;
     }
 
     /**
