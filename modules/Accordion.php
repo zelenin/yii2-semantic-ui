@@ -101,9 +101,11 @@ class Accordion extends Widget
      */
     public function renderTitle($item)
     {
-        $encode = ArrayHelper::getValue($this->titleOptions, 'encode', true);
+        $options = ArrayHelper::merge($this->titleOptions, ArrayHelper::getValue($item, 'titleOptions', []));
+
+        $encode = ArrayHelper::getValue($options, 'encode', true);
         $title = Elements::icon('dropdown') . ($encode ? Html::encode($item['title']) : $item['title']);
-        $options = $this->titleOptions;
+
         Html::addCssClass($options, 'title');
         if ($item['active']) {
             Html::addCssClass($options, 'active');
@@ -118,9 +120,11 @@ class Accordion extends Widget
      */
     public function renderContent($item)
     {
-        $encode = ArrayHelper::getValue($this->contentOptions, 'encode', true);
+        $options = ArrayHelper::merge($this->contentOptions, ArrayHelper::getValue($item, 'contentOptions', []));
+
+        $encode = ArrayHelper::getValue($options, 'encode', true);
         $content = $encode ? Html::encode($item['content']) : $item['content'];
-        $options = $this->contentOptions;
+
         Html::addCssClass($options, 'content');
         if ($item['active']) {
             Html::addCssClass($options, 'active');
