@@ -83,7 +83,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public function dropDownList($items, $options = [])
     {
-        $multiple = ArrayHelper::remove($options, 'multiple', 'false');
+        $multiple = ArrayHelper::remove($options, 'multiple', false);
         $this->parts['{input}'] = Dropdown::widget([
             'class' => Dropdown::className(),
             'model' => $this->model,
