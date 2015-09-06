@@ -237,19 +237,12 @@ class Menu extends Widget
             }
 
             if (isset($item['items'])) {
-                if (isset($item['url'])) {
-                    $item['label'] =
-                        Html::a($item['label'], Url::to($item['url']), []) .
-                        Elements::icon('dropdown') .
-                        Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
-                    unset($item['url']);
-                } else {
-                    $item['label'] =
-                        $item['label'] .
-                        Elements::icon('dropdown') .
-                        Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
-                }
                 Html::addCssClass($item['options'], 'ui simple dropdown');
+                $item['label'] =
+                    $item['label'] .
+                    Elements::icon('dropdown') .
+                    Html::tag('div', $this->renderMenuPart($item['items']), ['class' => 'menu']);
+
                 $menu = $this->renderItem($item);
             } else {
                 $menu = $this->renderItem($item);
