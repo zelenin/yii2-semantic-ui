@@ -22,6 +22,14 @@ class InputWidget extends \yii\widgets\InputWidget
         isset($this->options['id'])
             ? $this->setId($this->options['id'])
             : $this->options['id'] = $this->getId();
+
+        if (is_array($this->options)) {
+            foreach($this->options as $name => $value) {
+                if (property_exists($this, $name)) {
+                    $this->$name = $value;
+                }
+            }
+        }
     }
 
     public function registerJsAsset()
