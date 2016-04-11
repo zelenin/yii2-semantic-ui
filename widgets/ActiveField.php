@@ -84,14 +84,24 @@ class ActiveField extends \yii\widgets\ActiveField
     public function dropDownList($items, $options = [])
     {
         $multiple = ArrayHelper::remove($options, 'multiple', false);
+        $upward = ArrayHelper::remove($options, 'upward', false);
+        $compact = ArrayHelper::remove($options, 'compact', false);
+        $disabled = ArrayHelper::remove($options, 'disabled', false);
+        $fluid = ArrayHelper::remove($options, 'fluid', false);
+        $search = ArrayHelper::remove($options, 'search', true);
+
         $this->parts['{input}'] = Dropdown::widget([
             'class' => Dropdown::className(),
             'model' => $this->model,
             'attribute' => $this->attribute,
             'items' => $items,
             'options' => $options,
-            'search' => true,
-            'multiple' => $multiple
+            'search' => $search,
+            'multiple' => $multiple,
+            'upward' => $upward,
+            'compact' => $compact,
+            'disabled' => $disabled,
+            'fluid' => $fluid,
         ]);
         return $this;
     }
