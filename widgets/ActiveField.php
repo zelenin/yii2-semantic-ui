@@ -102,6 +102,7 @@ class ActiveField extends \yii\widgets\ActiveField
             'compact' => $compact,
             'disabled' => $disabled,
             'fluid' => $fluid,
+            'defaultText' => $this->inputOptions['placeholder']? : $this->inputOptions['placeholder']
         ]);
         return $this;
     }
