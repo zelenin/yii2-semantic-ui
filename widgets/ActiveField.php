@@ -89,6 +89,7 @@ class ActiveField extends \yii\widgets\ActiveField
         $disabled = ArrayHelper::remove($options, 'disabled', false);
         $fluid = ArrayHelper::remove($options, 'fluid', false);
         $search = ArrayHelper::remove($options, 'search', true);
+        $defaultText = ArrayHelper::remove($options, 'defaultText', '');
 
         $this->parts['{input}'] = Dropdown::widget([
             'class' => Dropdown::className(),
@@ -102,6 +103,7 @@ class ActiveField extends \yii\widgets\ActiveField
             'compact' => $compact,
             'disabled' => $disabled,
             'fluid' => $fluid,
+            'defaultText' => $defaultText
         ]);
         return $this;
     }
