@@ -6,9 +6,9 @@ use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use Zelenin\yii\SemanticUI\Elements;
-use Zelenin\yii\SemanticUI\Widget;
+use Zelenin\yii\SemanticUI\InputWidget;
 
-class Search extends Widget
+class Search extends InputWidget
 {
     /**
      * @var string
