@@ -24,7 +24,7 @@
     },
     "require": {
         "yiisoft/yii2": "~2",
-        "bower-asset/semantic": "~2"
+        "bower-asset/semantic-ui": "~2"
     },
     "autoload": {
         "psr-4": {

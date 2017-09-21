@@ -10,7 +10,7 @@ class SemanticUIJSAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@vendor/bower/semantic/dist';
+    public $sourcePath = '@bower/semantic-ui/dist';
 
     /**
      * @var array
