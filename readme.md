@@ -63,10 +63,6 @@ Yii::$container->set(\yii\grid\CheckboxColumn::className(), \Zelenin\yii\Semanti
 
 Be very careful with it.
 
-### Demo
-
-[Demo site](http://yii2-semantic-ui.zelenin.pw)
-
 ## Author
 
 [Aleksandr Zelenin](https://github.com/zelenin/), e-mail: [aleksandr@zelenin.me](mailto:aleksandr@zelenin.me)
