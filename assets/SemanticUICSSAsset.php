@@ -11,6 +11,13 @@ class SemanticUICSSAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@vendor/bower/semantic/dist';
+	
+	/**
+     * @var array
+     */
+    public $depends = [
+        'yii\bootstrap\BootstrapPluginAsset',
+    ];
 
     public function init()
     {
