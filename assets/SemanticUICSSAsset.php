@@ -10,7 +10,7 @@ class SemanticUICSSAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@vendor/bower/semantic/dist';
+    public $sourcePath = '@bower/semantic/dist';
 
     public function init()
     {
