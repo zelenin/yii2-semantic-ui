@@ -23,9 +23,23 @@ class ActiveField extends \yii\widgets\ActiveField
     public $template = "{label}\n{input}\n{hint}\n{error}";
     public $checkboxTemplate = '<div class="ui checkbox">{input}{label}{hint}{error}</div>';
 
+    /**
+     * @var string|null optional template to render the `{input}` placeholder content
+     */
+    public $inputTemplate;
+
     public function render($content = null)
     {
         $this->registerStyles();
+
+        if ($content === null) {
+            if ($this->inputTemplate) {
+                $input = isset($this->parts['{input}']) ?
+                    $this->parts['{input}'] : Html::activeTextInput($this->model, $this->attribute, $this->inputOptions);
+                $this->parts['{input}'] = strtr($this->inputTemplate, ['{input}' => $input]);
+            }
+        }
+
         return parent::render($content);
     }
 
